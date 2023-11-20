@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+//    id("maven-publish")
 }
 
 android {
@@ -32,6 +33,29 @@ android {
     }
 }
 
+/*publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = "com.example.myfirstdemolibrary"
+            artifactId = "myfirstdemolibrary"
+            version = "1.0"
+//            artifact("$buildDir/outputs/aar/myfirstdemolibrary-release.aar")
+            artifact("$buildDir/outputs/aar/myfirstdemolibrary-release.aar")
+        }
+    }
+
+    repositories {
+        maven {
+            name = "kPoint-Pvt"
+            url = uri("https://maven.pkg.github.com/kPoint-Pvt/Dymmy_Fab_Application")
+            credentials {
+                username = "kPoint-Pvt"
+                password ="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"
+            }
+        }
+    }
+
+}*/
 dependencies {
 
     implementation("androidx.core:core-ktx:1.9.0")
