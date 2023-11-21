@@ -1,11 +1,15 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
-//    id("maven-publish")
+    id("maven-publish")
 }
 
 android {
-    namespace = "com.example.myfirstdemolibrary"
+    namespace = "io.github.myfirstdemolibrary"
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+        }
     compileSdk = 33
 
     defaultConfig {
@@ -15,9 +19,13 @@ android {
         consumerProguardFiles("consumer-rules.pro")
     }
 
+//    namespace 'io.github.geofriendtech.appdatamanager' // Profide final artifact id
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
+            signingConfig = signingConfigs.getByName("debug")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -32,6 +40,23 @@ android {
         jvmTarget = "1.8"
     }
 }
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = "com.example.myfirstdemolibrary"
+            artifactId = "myfirstdemolibrary"
+            version = "1.0"
+            artifact("$buildDir/outputs/aar/myProject.aar")
+        }
+    }
+
+    repositories {
+        maven {
+            url = uri("https://maven.pkg.github.com/kPoint-Pvt/Dymmy_Fab_Application")
+        }
+    }
+}
+
 
 /*publishing {
     publications {
@@ -50,7 +75,7 @@ android {
             url = uri("https://maven.pkg.github.com/kPoint-Pvt/Dymmy_Fab_Application")
             credentials {
                 username = "kPoint-Pvt"
-                password ="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"
+                password ="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"
             }
         }
     }
@@ -58,10 +83,14 @@ android {
 }*/
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.9.0")
+    implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.10.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+}
+// import publish-package.gradle
+apply {
+    from("$rootDir/app/publish-package.gradle")
 }

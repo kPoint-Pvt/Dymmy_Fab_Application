@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.dymmyfabapplication.ui.theme.DymmyFabApplicationTheme
+import com.example.myfablibrary.HelloWorld
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,9 +24,12 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     Greeting("Android")
+                    println("Addition of two numbers is:" + HelloWorld().add(1, 2)) // Add this
                 }
             }
         }
+
+
     }
 }
 
